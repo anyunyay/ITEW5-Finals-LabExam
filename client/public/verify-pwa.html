@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PWA Configuration Verification</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+    h1 {
+      color: #0066CC;
+      margin-bottom: 10px;
+    }
+    .status {
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 8px;
+      border-left: 4px solid;
+    }
+    .success {
+      background: #d4edda;
+      border-color: #28a745;
+      color: #155724;
+    }
+    .error {
+      background: #f8d7da;
+      border-color: #dc3545;
+      color: #721c24;
+    }
+    .warning {
+      background: #fff3cd;
+      border-color: #ffc107;
+      color: #856404;
+    }
+    .info {
+      background: #d1ecf1;
+      border-color: #17a2b8;
+      color: #0c5460;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 15px;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-size: 12px;
+    }
+    button {
+      background: #0066CC;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px 5px 10px 0;
+    }
+    button:hover {
+      background: #0052a3;
+    }
+    .icon-preview {
+      display: flex;
+      gap: 20px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    .icon-preview img {
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    .check-item {
+      padding: 10px;
+      margin: 5px 0;
+      background: #f8f9fa;
+      border-radius: 4px;
+    }
+    .check-item.pass::before {
+      content: "✓ ";
+      color: #28a745;
+      font-weight: bold;
+    }
+    .check-item.fail::before {
+      content: "✗ ";
+      color: #dc3545;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🏆 PWA Configuration Verification</h1>
+    <p>This page verifies that the PWA manifest and icons are properly configured.</p>
+    
+    <button onclick="runChecks()">Run Verification</button>
+    <button onclick="location.reload()">Refresh</button>
+    
+    <div id="results"></div>
+  </div>
+
+  <script>
+    async function runChecks() {
+      const results = document.getElementById('results');
+      results.innerHTML = '<h2>Running checks...</h2>';
+      
+      const checks = [];
+      
+      // Check 1: Manifest file
+      try {
+        const manifestResponse = await fetch('/manifest.json');
+        if (manifestResponse.ok) {
+          const manifest = await manifestResponse.json();
+          checks.push({
+            name: 'Manifest File',
+            status: 'success',
+            message: 'manifest.json is accessible',
+            data: manifest
+          });
+          
+          // Check manifest properties
+          const requiredProps = ['name', 'short_name', 'start_url', 'display', 'icons'];
+          const missingProps = requiredProps.filter(prop => !manifest[prop]);
+          
+          if (missingProps.length === 0) {
+            checks.push({
+              name: 'Manifest Properties',
+              status: 'success',
+              message: 'All required properties present'
+            });
+          } else {
+            checks.push({
+              name: 'Manifest Properties',
+              status: 'error',
+              message: `Missing properties: ${missingProps.join(', ')}`
+            });
+          }
+          
+          // Check icons
+          if (manifest.icons && manifest.icons.length > 0) {
+            checks.push({
+              name: 'Manifest Icons',
+              status: 'success',
+              message: `${manifest.icons.length} icon(s) defined`,
+              data: manifest.icons
+            });
+          } else {
+            checks.push({
+              name: 'Manifest Icons',
+              status: 'error',
+              message: 'No icons defined in manifest'
+            });
+          }
+        } else {
+          checks.push({
+            name: 'Manifest File',
+            status: 'error',
+            message: `Failed to load manifest.json (${manifestResponse.status})`
+          });
+        }
+      } catch (error) {
+        checks.push({
+          name: 'Manifest File',
+          status: 'error',
+          message: `Error loading manifest: ${error.message}`
+        });
+      }
+      
+      // Check 2: Icon files
+      const iconSizes = ['192x192', '512x512'];
+      for (const size of iconSizes) {
+        try {
+          const iconResponse = await fetch(`/icons/icon-${size}.png`);
+          if (iconResponse.ok) {
+            checks.push({
+              name: `Icon ${size}`,
+              status: 'success',
+              message: `icon-${size}.png is accessible`,
+              icon: `/icons/icon-${size}.png`
+            });
+          } else {
+            checks.push({
+              name: `Icon ${size}`,
+              status: 'error',
+              message: `icon-${size}.png not found (${iconResponse.status})`
+            });
+          }
+        } catch (error) {
+          checks.push({
+            name: `Icon ${size}`,
+            status: 'error',
+            message: `Error loading icon: ${error.message}`
+          });
+        }
+      }
+      
+      // Check 3: Favicon
+      try {
+        const faviconResponse = await fetch('/favicon.svg');
+        if (faviconResponse.ok) {
+          checks.push({
+            name: 'Favicon',
+            status: 'success',
+            message: 'favicon.svg is accessible'
+          });
+        } else {
+          checks.push({
+            name: 'Favicon',
+            status: 'warning',
+            message: 'favicon.svg not found (optional)'
+          });
+        }
+      } catch (error) {
+        checks.push({
+          name: 'Favicon',
+          status: 'warning',
+          message: 'Could not check favicon'
+        });
+      }
+      
+      // Check 4: Service Worker (expected to fail for now)
+      if ('serviceWorker' in navigator) {
+        checks.push({
+          name: 'Service Worker Support',
+          status: 'success',
+          message: 'Browser supports Service Workers'
+        });
+        
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        if (registrations.length > 0) {
+          checks.push({
+            name: 'Service Worker Registration',
+            status: 'success',
+            message: `${registrations.length} service worker(s) registered`
+          });
+        } else {
+          checks.push({
+            name: 'Service Worker Registration',
+            status: 'info',
+            message: 'No service worker registered yet (will be implemented in Task 20)'
+          });
+        }
+      } else {
+        checks.push({
+          name: 'Service Worker Support',
+          status: 'error',
+          message: 'Browser does not support Service Workers'
+        });
+      }
+      
+      // Display results
+      displayResults(checks);
+    }
+    
+    function displayResults(checks) {
+      const results = document.getElementById('results');
+      let html = '<h2>Verification Results</h2>';
+      
+      const summary = {
+        success: checks.filter(c => c.status === 'success').length,
+        error: checks.filter(c => c.status === 'error').length,
+        warning: checks.filter(c => c.status === 'warning').length,
+        info: checks.filter(c => c.status === 'info').length
+      };
+      
+      html += `<div class="status ${summary.error > 0 ? 'warning' : 'success'}">`;
+      html += `<strong>Summary:</strong> ${summary.success} passed, ${summary.error} failed, ${summary.warning} warnings, ${summary.info} info`;
+      html += '</div>';
+      
+      checks.forEach(check => {
+        html += `<div class="check-item ${check.status === 'success' ? 'pass' : 'fail'}">`;
+        html += `<strong>${check.name}:</strong> ${check.message}`;
+        
+        if (check.data) {
+          html += `<pre>${JSON.stringify(check.data, null, 2)}</pre>`;
+        }
+        
+        if (check.icon) {
+          html += `<div class="icon-preview"><img src="${check.icon}" alt="${check.name}" style="max-width: 100px;"></div>`;
+        }
+        
+        html += '</div>';
+      });
+      
+      results.innerHTML = html;
+    }
+    
+    // Auto-run on load
+    window.addEventListener('load', runChecks);
+  </script>
+</body>
+</html>

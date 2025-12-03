@@ -1,0 +1,24 @@
+<svg width="192" height="192" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="192" height="192" fill="#0066CC"/>
+  
+  <!-- Trophy Icon -->
+  <g transform="translate(96, 96)">
+    <!-- Trophy Cup -->
+    <path d="M -40 -50 L -50 -30 L -40 0 L 40 0 L 50 -30 L 40 -50 Z" fill="#FFB700" stroke="#FFC107" stroke-width="2"/>
+    
+    <!-- Trophy Handles -->
+    <path d="M -50 -40 Q -65 -40 -65 -25 Q -65 -10 -50 -10" fill="none" stroke="#FFB700" stroke-width="4"/>
+    <path d="M 50 -40 Q 65 -40 65 -25 Q 65 -10 50 -10" fill="none" stroke="#FFB700" stroke-width="4"/>
+    
+    <!-- Trophy Base -->
+    <rect x="-30" y="0" width="60" height="8" fill="#FFB700"/>
+    <rect x="-35" y="8" width="70" height="12" fill="#FFB700"/>
+    
+    <!-- Checkmark -->
+    <path d="M -15 -30 L -5 -20 L 15 -40" fill="none" stroke="#0066CC" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="96" y="160" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">TASKS</text>
+</svg>

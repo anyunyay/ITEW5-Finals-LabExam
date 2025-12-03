@@ -1,0 +1,28 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#0066CC"/>
+  
+  <!-- Trophy Icon -->
+  <g transform="translate(256, 256)">
+    <!-- Trophy Cup -->
+    <path d="M -100 -140 L -130 -80 L -100 10 L 100 10 L 130 -80 L 100 -140 Z" fill="#FFB700" stroke="#FFC107" stroke-width="6"/>
+    
+    <!-- Trophy Handles -->
+    <path d="M -130 -110 Q -170 -110 -170 -70 Q -170 -30 -130 -30" fill="none" stroke="#FFB700" stroke-width="10"/>
+    <path d="M 130 -110 Q 170 -110 170 -70 Q 170 -30 130 -30" fill="none" stroke="#FFB700" stroke-width="10"/>
+    
+    <!-- Trophy Base -->
+    <rect x="-80" y="10" width="160" height="20" fill="#FFB700"/>
+    <rect x="-90" y="30" width="180" height="30" fill="#FFB700"/>
+    
+    <!-- Checkmark -->
+    <path d="M -40 -80 L -15 -55 L 40 -110" fill="none" stroke="#0066CC" stroke-width="10" stroke-linecap="round"/>
+    
+    <!-- Stars -->
+    <path d="M -60 -120 L -55 -105 L -40 -105 L -52 -95 L -47 -80 L -60 -90 L -73 -80 L -68 -95 L -80 -105 L -65 -105 Z" fill="#00AA44"/>
+    <path d="M 60 -120 L 65 -105 L 80 -105 L 68 -95 L 73 -80 L 60 -90 L 47 -80 L 52 -95 L 40 -105 L 55 -105 Z" fill="#00AA44"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="256" y="430" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">SPORTS TASKS</text>
+</svg>

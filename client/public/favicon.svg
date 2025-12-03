@@ -1,0 +1,21 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="32" height="32" fill="#0066CC" rx="4"/>
+  
+  <!-- Trophy Icon -->
+  <g transform="translate(16, 16)">
+    <!-- Trophy Cup -->
+    <path d="M -6 -8 L -8 -5 L -6 0 L 6 0 L 8 -5 L 6 -8 Z" fill="#FFB700"/>
+    
+    <!-- Trophy Handles -->
+    <path d="M -8 -6 Q -10 -6 -10 -4 Q -10 -2 -8 -2" fill="none" stroke="#FFB700" stroke-width="0.5"/>
+    <path d="M 8 -6 Q 10 -6 10 -4 Q 10 -2 8 -2" fill="none" stroke="#FFB700" stroke-width="0.5"/>
+    
+    <!-- Trophy Base -->
+    <rect x="-5" y="0" width="10" height="2" fill="#FFB700"/>
+    <rect x="-6" y="2" width="12" height="2" fill="#FFB700"/>
+    
+    <!-- Checkmark -->
+    <path d="M -2 -5 L -1 -4 L 2 -7" fill="none" stroke="#0066CC" stroke-width="1" stroke-linecap="round"/>
+  </g>
+</svg>
