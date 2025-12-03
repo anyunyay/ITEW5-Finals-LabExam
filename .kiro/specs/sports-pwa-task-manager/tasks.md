@@ -49,7 +49,12 @@
   - Implement timestamps (createdAt, updatedAt)
   - _Requirements: 2.1, 2.2_
 
-- [ ] 5. Build authentication middleware and JWT utilities
+- [x] 5. Build authentication middleware and JWT utilities
+
+
+
+
+
   - Create JWT token generation utility function
   - Implement authentication middleware to verify JWT tokens
   - Extract user information from token and attach to request object
