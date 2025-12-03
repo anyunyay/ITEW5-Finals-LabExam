@@ -1,21 +1,36 @@
 .register-page .page-container {
   max-width: 500px;
   margin: 50px auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .register-page h2 {
   text-align: center;
+  color: #0066CC;
+  margin-bottom: 0.5rem;
 }
 
 .register-page .page-description {
   text-align: center;
-}
-
-.register-page .placeholder-content {
-  text-align: center;
+  color: #6C757D;
+  margin-bottom: 2rem;
 }
 
 .register-page .page-footer {
   text-align: center;
   font-size: 0.95rem;
+  margin-top: 1.5rem;
+}
+
+.register-page .page-footer a {
+  color: #0066CC;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-page .page-footer a:hover {
+  text-decoration: underline;
 }

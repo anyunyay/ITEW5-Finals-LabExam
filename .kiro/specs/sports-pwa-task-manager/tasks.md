@@ -164,7 +164,12 @@
   - Implement automatic token loading on app initialization
   - _Requirements: 1.5, 5.3_
 
-- [ ] 13. Build Login and Register pages with forms
+- [x] 13. Build Login and Register pages with forms
+
+
+
+
+
   - Create LoginPage with username/password form
   - Implement form validation and error display
   - Add Google OAuth login button with redirect to backend OAuth endpoint

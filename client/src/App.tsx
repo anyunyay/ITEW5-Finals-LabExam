@@ -4,6 +4,7 @@ import Navigation from './components/Navigation';
 import ProtectedRoute from './components/ProtectedRoute';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import AuthCallbackPage from './pages/AuthCallbackPage';
 import DashboardPage from './pages/DashboardPage';
 import TaskDetailPage from './pages/TaskDetailPage';
 import './App.css';
@@ -19,6 +20,7 @@ function App() {
               <Route path="/" element={<LoginPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
+              <Route path="/auth/callback" element={<AuthCallbackPage />} />
               <Route
                 path="/dashboard"
                 element={
