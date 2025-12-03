@@ -44,7 +44,7 @@ npm run dev
 ```
 
 This will start:
-- Client application on `http://localhost:5173` (Vite default)
+- Client application on `http://localhost:3000`
 - API server on `http://localhost:5000`
 
 ## Environment Variables
