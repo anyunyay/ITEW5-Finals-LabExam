@@ -1,0 +1,16 @@
+{
+  "name": "sports-pwa-task-manager-root",
+  "version": "1.0.0",
+  "description": "Sports PWA Task Manager - Root workspace",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\"",
+    "install:all": "npm install --prefix client && npm install --prefix server"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "mongodb": "^7.0.0"
+  }
+}
