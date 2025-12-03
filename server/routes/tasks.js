@@ -1,6 +1,7 @@
 import express from 'express';
 import Task from '../models/Task.js';
 import { authMiddleware } from '../middleware/auth.js';
+import { emitTaskEvent } from '../config/socket.js';
 
 const router = express.Router();
 
@@ -61,6 +62,12 @@ router.post('/', async (req, res) => {
     });
 
     await task.save();
+
+    // Emit real-time event to connected clients
+    const io = req.app.locals.io;
+    if (io) {
+      emitTaskEvent(io, req.user.id, 'task:created', { task });
+    }
 
     res.status(201).json({
       message: 'Task created successfully',
@@ -201,6 +208,12 @@ router.put('/:id', async (req, res) => {
 
     await task.save();
 
+    // Emit real-time event to connected clients
+    const io = req.app.locals.io;
+    if (io) {
+      emitTaskEvent(io, req.user.id, 'task:updated', { task });
+    }
+
     res.json({
       message: 'Task updated successfully',
       task
@@ -269,6 +282,12 @@ router.delete('/:id', async (req, res) => {
     }
 
     await task.deleteOne();
+
+    // Emit real-time event to connected clients
+    const io = req.app.locals.io;
+    if (io) {
+      emitTaskEvent(io, req.user.id, 'task:deleted', { taskId: id });
+    }
 
     res.json({
       message: 'Task deleted successfully',

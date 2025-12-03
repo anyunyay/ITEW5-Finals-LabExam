@@ -1,9 +1,11 @@
 import express from 'express';
+import { createServer } from 'http';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import passport from 'passport';
 import connectDB from './config/db.js';
 import configurePassport from './config/passport.js';
+import { configureSocket } from './config/socket.js';
 import authRoutes from './routes/auth.js';
 import taskRoutes from './routes/tasks.js';
 
@@ -12,6 +14,15 @@ dotenv.config();
 
 // Initialize Express app
 const app = express();
+
+// Create HTTP server for Socket.io
+const httpServer = createServer(app);
+
+// Configure Socket.io
+const io = configureSocket(httpServer);
+
+// Make io accessible to routes via app.locals
+app.locals.io = io;
 
 // Configure Passport strategies
 configurePassport();
@@ -78,11 +89,12 @@ const startServer = async () => {
     // Connect to MongoDB
     await connectDB();
 
-    // Start Express server
-    app.listen(PORT, () => {
+    // Start HTTP server (with Socket.io)
+    httpServer.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);
       console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
       console.log(`🎯 API URL: http://localhost:${PORT}`);
+      console.log(`🔌 WebSocket server ready`);
       console.log(`⚽ Sports PWA Task Manager API is ready!`);
     });
   } catch (error) {
@@ -93,4 +105,4 @@ const startServer = async () => {
 
 startServer();
 
-export default app;
+export { app, io };
