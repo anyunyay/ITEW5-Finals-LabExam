@@ -191,7 +191,12 @@
   - Implement loading states for async operations
   - _Requirements: 2.1, 2.2, 2.3, 2.4_
 
-- [ ] 15. Build Dashboard page with task list and creation
+- [x] 15. Build Dashboard page with task list and creation
+
+
+
+
+
   - Create DashboardPage component with task list display
   - Implement TaskCard component with status, priority, and action buttons
   - Add create task form or modal
