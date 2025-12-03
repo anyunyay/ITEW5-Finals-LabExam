@@ -1,7 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import passport from 'passport';
 import connectDB from './config/db.js';
+import configurePassport from './config/passport.js';
 import authRoutes from './routes/auth.js';
 
 // Load environment variables
@@ -10,6 +12,9 @@ dotenv.config();
 // Initialize Express app
 const app = express();
 
+// Configure Passport strategies
+configurePassport();
+
 // Middleware
 app.use(cors({
   origin: process.env.CLIENT_URL || 'http://localhost:5173',
@@ -17,6 +22,9 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Initialize Passport
+app.use(passport.initialize());
 
 // Basic health check route
 app.get('/api/health', (req, res) => {

@@ -1,4 +1,5 @@
 import express from 'express';
+import passport from 'passport';
 import User from '../models/User.js';
 import { generateToken } from '../utils/jwt.js';
 import { authMiddleware } from '../middleware/auth.js';
@@ -254,5 +255,52 @@ router.get('/me', authMiddleware, async (req, res) => {
     });
   }
 });
+
+/**
+ * @route   GET /api/auth/google
+ * @desc    Initiate Google OAuth flow
+ * @access  Public
+ */
+router.get(
+  '/google',
+  passport.authenticate('google', {
+    scope: ['profile', 'email'],
+    session: false
+  })
+);
+
+/**
+ * @route   GET /api/auth/google/callback
+ * @desc    Handle Google OAuth callback
+ * @access  Public
+ */
+router.get(
+  '/google/callback',
+  passport.authenticate('google', {
+    session: false,
+    failureRedirect: `${process.env.CLIENT_URL}/login?error=oauth_failed`
+  }),
+  async (req, res) => {
+    try {
+      // User is authenticated via Passport, available in req.user
+      const user = req.user;
+
+      if (!user) {
+        return res.redirect(`${process.env.CLIENT_URL}/login?error=no_user`);
+      }
+
+      // Generate JWT token for the authenticated user
+      const token = generateToken(user);
+
+      // Redirect to frontend with token
+      // Frontend will extract token from URL and store it
+      const redirectUrl = `${process.env.CLIENT_URL}/auth/callback?token=${token}`;
+      res.redirect(redirectUrl);
+    } catch (error) {
+      console.error('Google OAuth callback error:', error);
+      res.redirect(`${process.env.CLIENT_URL}/login?error=callback_failed`);
+    }
+  }
+);
 
 export default router;
