@@ -273,7 +273,12 @@
   - Add service worker activation and update handling
   - _Requirements: 3.3, 3.4, 4.1_
 
-- [ ] 21. Implement offline detection and cached content serving
+- [x] 21. Implement offline detection and cached content serving
+
+
+
+
+
   - Add online/offline event listeners to detect connectivity changes
   - Update app state with connection status
   - Display OfflineIndicator component when offline

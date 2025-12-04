@@ -4,6 +4,7 @@ import { TaskProvider } from './context/TaskContext';
 import { useTask } from './context/TaskContext';
 import Navigation from './components/Navigation';
 import ConnectionStatus from './components/ConnectionStatus';
+import OfflineIndicator from './components/OfflineIndicator';
 import ServiceWorkerUpdate from './components/ServiceWorkerUpdate';
 import ProtectedRoute from './components/ProtectedRoute';
 import LoginPage from './pages/LoginPage';
@@ -14,13 +15,14 @@ import TaskDetailPage from './pages/TaskDetailPage';
 import './App.css';
 
 function AppContent() {
-  const { socketConnected } = useTask();
+  const { socketConnected, isOnline, isUsingCachedData } = useTask();
 
   return (
     <Router>
       <div className="app">
         <Navigation />
         <ConnectionStatus isConnected={socketConnected} />
+        <OfflineIndicator isOnline={isOnline} isUsingCachedData={isUsingCachedData} />
         <ServiceWorkerUpdate />
         <main className="main-content">
           <Routes>

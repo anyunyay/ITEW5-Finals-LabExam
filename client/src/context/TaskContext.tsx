@@ -17,6 +17,8 @@ interface TaskState {
   loading: boolean;
   error: string | null;
   socketConnected: boolean;
+  isOnline: boolean;
+  isUsingCachedData: boolean;
 }
 
 interface TaskContextType extends TaskState {
@@ -34,6 +36,8 @@ interface TaskProviderProps {
   children: ReactNode;
 }
 
+const TASKS_CACHE_KEY = 'sports_pwa_tasks_cache';
+
 export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
   const { token, isAuthenticated } = useAuth();
   const [taskState, setTaskState] = useState<TaskState>({
@@ -41,7 +45,39 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
     loading: false,
     error: null,
     socketConnected: false,
+    isOnline: navigator.onLine,
+    isUsingCachedData: false,
   });
+
+  /**
+   * Save tasks to localStorage cache
+   */
+  const saveTasksToCache = useCallback((tasks: Task[]) => {
+    try {
+      localStorage.setItem(TASKS_CACHE_KEY, JSON.stringify({
+        tasks,
+        timestamp: Date.now(),
+      }));
+    } catch (error) {
+      console.error('Failed to cache tasks:', error);
+    }
+  }, []);
+
+  /**
+   * Load tasks from localStorage cache
+   */
+  const loadTasksFromCache = useCallback((): Task[] | null => {
+    try {
+      const cached = localStorage.getItem(TASKS_CACHE_KEY);
+      if (cached) {
+        const { tasks } = JSON.parse(cached);
+        return tasks;
+      }
+    } catch (error) {
+      console.error('Failed to load cached tasks:', error);
+    }
+    return null;
+  }, []);
 
   /**
    * Clear error message
@@ -98,6 +134,99 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
   }, []);
 
   /**
+   * Fetch all tasks for the authenticated user
+   */
+  const fetchTasks = useCallback(async () => {
+    setTaskState((prev) => ({ ...prev, loading: true, error: null, isUsingCachedData: false }));
+    
+    // If offline, try to load from cache
+    if (!navigator.onLine) {
+      const cachedTasks = loadTasksFromCache();
+      if (cachedTasks) {
+        console.log('Loading tasks from cache (offline mode)');
+        setTaskState((prev) => ({
+          ...prev,
+          tasks: cachedTasks,
+          loading: false,
+          error: null,
+          isUsingCachedData: true,
+        }));
+        return;
+      } else {
+        setTaskState((prev) => ({
+          ...prev,
+          loading: false,
+          error: 'No cached data available. Please connect to the internet.',
+          isUsingCachedData: false,
+        }));
+        return;
+      }
+    }
+
+    // Online: fetch from server
+    try {
+      const tasks = await getTasks();
+      saveTasksToCache(tasks);
+      setTaskState((prev) => ({
+        ...prev,
+        tasks,
+        loading: false,
+        error: null,
+        isUsingCachedData: false,
+      }));
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Failed to fetch tasks';
+      
+      // If fetch fails, try to load from cache as fallback
+      const cachedTasks = loadTasksFromCache();
+      if (cachedTasks) {
+        console.log('Loading tasks from cache (network error fallback)');
+        setTaskState((prev) => ({
+          ...prev,
+          tasks: cachedTasks,
+          loading: false,
+          error: 'Using cached data. ' + errorMessage,
+          isUsingCachedData: true,
+        }));
+      } else {
+        setTaskState((prev) => ({
+          ...prev,
+          loading: false,
+          error: errorMessage,
+          isUsingCachedData: false,
+        }));
+      }
+    }
+  }, [loadTasksFromCache, saveTasksToCache]);
+
+  /**
+   * Set up online/offline event listeners
+   */
+  useEffect(() => {
+    const handleOnline = () => {
+      console.log('Network connection restored');
+      setTaskState((prev) => ({ ...prev, isOnline: true, isUsingCachedData: false }));
+      // Automatically refetch tasks when coming back online
+      if (isAuthenticated) {
+        fetchTasks();
+      }
+    };
+
+    const handleOffline = () => {
+      console.log('Network connection lost');
+      setTaskState((prev) => ({ ...prev, isOnline: false }));
+    };
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, [isAuthenticated, fetchTasks]);
+
+  /**
    * Set up socket connection and event listeners
    */
   useEffect(() => {
@@ -128,29 +257,6 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
   }, [isAuthenticated, token, handleTaskCreated, handleTaskUpdated, handleTaskDeleted, handleConnectionStatus]);
 
   /**
-   * Fetch all tasks for the authenticated user
-   */
-  const fetchTasks = useCallback(async () => {
-    setTaskState((prev) => ({ ...prev, loading: true, error: null }));
-    try {
-      const tasks = await getTasks();
-      setTaskState((prev) => ({
-        ...prev,
-        tasks,
-        loading: false,
-        error: null,
-      }));
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Failed to fetch tasks';
-      setTaskState((prev) => ({
-        ...prev,
-        loading: false,
-        error: errorMessage,
-      }));
-    }
-  }, []);
-
-  /**
    * Fetch a specific task by ID
    */
   const fetchTaskById = useCallback(async (id: string): Promise<Task | null> => {
@@ -177,9 +283,11 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
     setTaskState((prev) => ({ ...prev, loading: true, error: null }));
     try {
       const newTask = await createTaskAPI(taskData);
+      const updatedTasks = [...taskState.tasks, newTask];
+      saveTasksToCache(updatedTasks);
       setTaskState((prev) => ({
         ...prev,
-        tasks: [...prev.tasks, newTask],
+        tasks: updatedTasks,
         loading: false,
         error: null,
       }));
@@ -193,7 +301,7 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
       }));
       return null;
     }
-  }, []);
+  }, [taskState.tasks, saveTasksToCache]);
 
   /**
    * Update an existing task
@@ -202,9 +310,11 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
     setTaskState((prev) => ({ ...prev, loading: true, error: null }));
     try {
       const updatedTask = await updateTaskAPI(id, taskData);
+      const updatedTasks = taskState.tasks.map((task) => (task.id === id ? updatedTask : task));
+      saveTasksToCache(updatedTasks);
       setTaskState((prev) => ({
         ...prev,
-        tasks: prev.tasks.map((task) => (task.id === id ? updatedTask : task)),
+        tasks: updatedTasks,
         loading: false,
         error: null,
       }));
@@ -218,7 +328,7 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
       }));
       return null;
     }
-  }, []);
+  }, [taskState.tasks, saveTasksToCache]);
 
   /**
    * Delete a task
@@ -227,9 +337,11 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
     setTaskState((prev) => ({ ...prev, loading: true, error: null }));
     try {
       await deleteTaskAPI(id);
+      const updatedTasks = taskState.tasks.filter((task) => task.id !== id);
+      saveTasksToCache(updatedTasks);
       setTaskState((prev) => ({
         ...prev,
-        tasks: prev.tasks.filter((task) => task.id !== id),
+        tasks: updatedTasks,
         loading: false,
         error: null,
       }));
@@ -243,7 +355,7 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
       }));
       return false;
     }
-  }, []);
+  }, [taskState.tasks, saveTasksToCache]);
 
   const value: TaskContextType = {
     ...taskState,
