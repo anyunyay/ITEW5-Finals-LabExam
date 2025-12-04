@@ -326,7 +326,12 @@
   - Apply sports-themed player card design
   - _Requirements: 5.1, 5.5_
 
-- [ ] 25. Implement navigation and route protection
+- [x] 25. Implement navigation and route protection
+
+
+
+
+
   - Create Navigation component with links to all pages
   - Highlight active route in navigation
   - Display user info in navigation when authenticated

@@ -1,7 +1,8 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { TaskProvider } from './context/TaskContext';
 import { useTask } from './context/TaskContext';
+import { useAuth } from './context/AuthContext';
 import Navigation from './components/Navigation';
 import ConnectionStatus from './components/ConnectionStatus';
 import OfflineIndicator from './components/OfflineIndicator';
@@ -17,6 +18,21 @@ import DashboardPage from './pages/DashboardPage';
 import TaskDetailPage from './pages/TaskDetailPage';
 import ProfilePage from './pages/ProfilePage';
 import './App.css';
+
+// Component to handle root route redirect based on auth status
+function RootRedirect() {
+  const { isAuthenticated, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner">Loading...</div>
+      </div>
+    );
+  }
+
+  return isAuthenticated ? <Navigate to="/dashboard" replace /> : <Navigate to="/login" replace />;
+}
 
 function AppContent() {
   const { socketConnected, isOnline, isUsingCachedData, queuedOperationsCount, isSyncing, syncError } = useTask();
@@ -37,7 +53,7 @@ function AppContent() {
         <InstallPrompt />
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<LoginPage />} />
+            <Route path="/" element={<RootRedirect />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/auth/callback" element={<AuthCallbackPage />} />

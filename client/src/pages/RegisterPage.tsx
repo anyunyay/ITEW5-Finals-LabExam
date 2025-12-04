@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './RegisterPage.css';
 
@@ -19,13 +19,16 @@ function RegisterPage() {
   
   const { register, isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Redirect if already authenticated
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/dashboard');
+      // Redirect to the page user was trying to access, or dashboard by default
+      const from = (location.state as any)?.from?.pathname || '/dashboard';
+      navigate(from, { replace: true });
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, location]);
 
   const validateForm = (): boolean => {
     const newErrors: {
@@ -81,7 +84,9 @@ function RegisterPage() {
 
     try {
       await register(username, email, password);
-      navigate('/dashboard');
+      // Redirect to the page user was trying to access, or dashboard by default
+      const from = (location.state as any)?.from?.pathname || '/dashboard';
+      navigate(from, { replace: true });
     } catch (error) {
       setErrors({
         general: error instanceof Error ? error.message : 'Registration failed. Please try again.',

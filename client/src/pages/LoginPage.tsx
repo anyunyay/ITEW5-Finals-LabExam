@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './LoginPage.css';
 
@@ -12,6 +12,7 @@ function LoginPage() {
   
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Check for OAuth errors in URL
   useEffect(() => {
@@ -30,9 +31,11 @@ function LoginPage() {
   // Redirect if already authenticated
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/dashboard');
+      // Redirect to the page user was trying to access, or dashboard by default
+      const from = (location.state as any)?.from?.pathname || '/dashboard';
+      navigate(from, { replace: true });
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, location]);
 
   const validateForm = (): boolean => {
     const newErrors: { email?: string; password?: string } = {};
@@ -67,7 +70,9 @@ function LoginPage() {
 
     try {
       await login(email, password);
-      navigate('/dashboard');
+      // Redirect to the page user was trying to access, or dashboard by default
+      const from = (location.state as any)?.from?.pathname || '/dashboard';
+      navigate(from, { replace: true });
     } catch (error) {
       setErrors({
         general: error instanceof Error ? error.message : 'Login failed. Please check your credentials.',
