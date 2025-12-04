@@ -15,6 +15,7 @@ import RegisterPage from './pages/RegisterPage';
 import AuthCallbackPage from './pages/AuthCallbackPage';
 import DashboardPage from './pages/DashboardPage';
 import TaskDetailPage from './pages/TaskDetailPage';
+import ProfilePage from './pages/ProfilePage';
 import './App.css';
 
 function AppContent() {
@@ -53,6 +54,14 @@ function AppContent() {
               element={
                 <ProtectedRoute>
                   <TaskDetailPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
                 </ProtectedRoute>
               }
             />

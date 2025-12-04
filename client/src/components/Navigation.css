@@ -66,6 +66,27 @@
   font-weight: 700;
 }
 
+.nav-user-info {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.user-display-name {
+  color: var(--white);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  text-transform: none;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 @media (max-width: 768px) {
   .nav-container {
     flex-direction: column;
