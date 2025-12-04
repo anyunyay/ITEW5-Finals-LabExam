@@ -7,7 +7,7 @@ import Navigation from './components/Navigation';
 import ConnectionStatus from './components/ConnectionStatus';
 import OfflineIndicator from './components/OfflineIndicator';
 import OfflineSyncIndicator from './components/OfflineSyncIndicator';
-import SyncDebugPanel from './components/SyncDebugPanel';
+// import SyncDebugPanel from './components/SyncDebugPanel';
 import ServiceWorkerUpdate from './components/ServiceWorkerUpdate';
 import InstallPrompt from './components/InstallPrompt';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -48,7 +48,7 @@ function AppContent() {
           isSyncing={isSyncing} 
           syncError={syncError} 
         />
-        <SyncDebugPanel />
+        {/* <SyncDebugPanel /> */}
         <ServiceWorkerUpdate />
         <InstallPrompt />
         <main className="main-content">
