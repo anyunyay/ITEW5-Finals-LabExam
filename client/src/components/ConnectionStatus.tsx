@@ -8,13 +8,13 @@ interface ConnectionStatusProps {
 }
 
 const ConnectionStatus: React.FC<ConnectionStatusProps> = ({ isConnected }) => {
-  const { token } = useAuth();
+  const { token, isAuthenticated } = useAuth();
   const [reconnectAttempts, setReconnectAttempts] = useState(0);
   const [showReconnectButton, setShowReconnectButton] = useState(false);
 
   useEffect(() => {
     // Show reconnect button after 5 seconds of being disconnected
-    if (!isConnected) {
+    if (!isConnected && isAuthenticated) {
       const timer = setTimeout(() => {
         setShowReconnectButton(true);
       }, 5000);
@@ -22,15 +22,15 @@ const ConnectionStatus: React.FC<ConnectionStatusProps> = ({ isConnected }) => {
     } else {
       setShowReconnectButton(false);
     }
-  }, [isConnected]);
+  }, [isConnected, isAuthenticated]);
 
   useEffect(() => {
     // Update reconnect attempts
-    if (!isConnected) {
+    if (!isConnected && isAuthenticated) {
       const info = socketService.getConnectionInfo();
       setReconnectAttempts(info.attempts);
     }
-  }, [isConnected]);
+  }, [isConnected, isAuthenticated]);
 
   const handleManualReconnect = () => {
     if (token) {
@@ -40,8 +40,9 @@ const ConnectionStatus: React.FC<ConnectionStatusProps> = ({ isConnected }) => {
     }
   };
 
-  if (isConnected) {
-    return null; // Don't show anything when connected
+  // Don't show banner if user is not authenticated or if connected
+  if (!isAuthenticated || isConnected) {
+    return null;
   }
 
   return (

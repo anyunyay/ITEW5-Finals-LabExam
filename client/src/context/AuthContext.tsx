@@ -42,12 +42,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // Load token and user from localStorage on initialization
   useEffect(() => {
     const loadAuthData = () => {
+      console.log('🔐 AuthContext: Loading auth data from localStorage');
+      
       try {
         const token = localStorage.getItem(TOKEN_KEY);
         const userStr = localStorage.getItem(USER_KEY);
 
         if (token && userStr) {
           const user = JSON.parse(userStr);
+          console.log('✅ AuthContext: Found stored auth data', { userId: user.id, username: user.username });
+          
           setAuthState({
             user,
             token,
@@ -55,10 +59,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             loading: false,
           });
         } else {
+          console.log('ℹ️ AuthContext: No stored auth data found');
           setAuthState(prev => ({ ...prev, loading: false }));
         }
       } catch (error) {
-        console.error('Error loading auth data:', error);
+        console.error('❌ AuthContext: Error loading auth data:', error);
         // Clear invalid data
         localStorage.removeItem(TOKEN_KEY);
         localStorage.removeItem(USER_KEY);
@@ -70,14 +75,24 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   const setAuthData = (token: string, user: User) => {
-    localStorage.setItem(TOKEN_KEY, token);
-    localStorage.setItem(USER_KEY, JSON.stringify(user));
-    setAuthState({
-      user,
-      token,
-      isAuthenticated: true,
-      loading: false,
-    });
+    console.log('🔐 AuthContext: Setting auth data', { userId: user.id, username: user.username });
+    
+    try {
+      localStorage.setItem(TOKEN_KEY, token);
+      localStorage.setItem(USER_KEY, JSON.stringify(user));
+      
+      setAuthState({
+        user,
+        token,
+        isAuthenticated: true,
+        loading: false,
+      });
+      
+      console.log('✅ AuthContext: Auth data set successfully');
+    } catch (error) {
+      console.error('❌ AuthContext: Error setting auth data', error);
+      throw error;
+    }
   };
 
   const login = async (email: string, password: string) => {

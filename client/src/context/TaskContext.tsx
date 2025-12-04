@@ -385,9 +385,14 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
    */
   useEffect(() => {
     if (isAuthenticated && token) {
-      // Connect socket with JWT token
-      socketService.connect(token);
+      console.log('🔌 TaskContext: Initializing socket connection with token');
+      // Small delay to ensure auth state is fully settled
+      const timer = setTimeout(() => {
+        socketService.connect(token);
+      }, 100);
+      return () => clearTimeout(timer);
     } else {
+      console.log('🔌 TaskContext: Disconnecting socket (not authenticated)');
       // Disconnect socket if not authenticated
       socketService.disconnect();
     }

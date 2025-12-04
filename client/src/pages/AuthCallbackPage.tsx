@@ -39,11 +39,16 @@ function AuthCallbackPage() {
 
         const data = await response.json();
         
+        console.log('✅ OAuth callback: User data received', data.user);
+        
         // Store token and user data
         setAuthData(token, data.user);
 
-        // Redirect to dashboard
-        navigate('/dashboard');
+        // Small delay to ensure auth state is fully updated before navigation
+        setTimeout(() => {
+          console.log('✅ OAuth callback: Navigating to dashboard');
+          navigate('/dashboard', { replace: true });
+        }, 200);
       } catch (error) {
         console.error('Error handling OAuth callback:', error);
         navigate('/login?error=callback_failed');
