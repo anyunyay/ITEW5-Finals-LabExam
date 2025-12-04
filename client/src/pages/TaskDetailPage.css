@@ -17,39 +17,42 @@
 }
 
 .task-detail-header h2 {
-  color: var(--primary-blue);
-  font-size: 2.5rem;
+  color: var(--darker-gray);
+  font-size: 2.25rem;
   margin-bottom: 8px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
 }
 
 .btn-back {
   background: var(--white);
   color: var(--primary-blue);
-  border: 2px solid var(--primary-blue);
+  border: 2px solid var(--medium-gray);
   padding: 12px 24px;
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   font-size: 1rem;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all var(--transition-base);
   white-space: nowrap;
   display: inline-block;
 }
 
 .btn-back:hover {
-  background: var(--primary-blue);
+  background: var(--gradient-primary);
   color: var(--white);
+  border-color: transparent;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+  box-shadow: var(--shadow-md);
 }
 
 .task-detail-form {
   background: var(--white);
-  border-radius: 16px;
-  padding: 32px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  border-left: 6px solid var(--primary-blue);
+  border-radius: var(--radius-2xl);
+  padding: 36px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--medium-gray);
   position: relative;
   overflow: hidden;
 }
@@ -59,9 +62,9 @@
   position: absolute;
   top: -50px;
   right: -50px;
-  width: 150px;
-  height: 150px;
-  background: radial-gradient(circle, rgba(0, 102, 204, 0.05) 0%, transparent 70%);
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -86,11 +89,11 @@
 .form-group select {
   width: 100%;
   padding: 14px 16px;
-  border: 2px solid var(--light-gray);
-  border-radius: 8px;
+  border: 2px solid var(--medium-gray);
+  border-radius: var(--radius-lg);
   font-size: 1rem;
   font-family: inherit;
-  transition: all 0.2s ease;
+  transition: all var(--transition-base);
   background: var(--white);
 }
 
@@ -99,7 +102,7 @@
 .form-group select:focus {
   outline: none;
   border-color: var(--primary-blue);
-  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
 }
 
 .form-group input:disabled,
@@ -152,14 +155,15 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary-blue) 0%, #0052a3 100%);
+  background: var(--gradient-primary);
   color: var(--white);
-  box-shadow: 0 2px 8px rgba(0, 102, 204, 0.2);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-lg);
 }
 
 .btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
+  box-shadow: var(--shadow-lg);
 }
 
 .btn-primary:disabled {
@@ -169,28 +173,29 @@
 }
 
 .btn-secondary {
-  background: var(--light-gray);
+  background: var(--white);
   color: var(--dark-gray);
-  border: 2px solid var(--light-gray);
+  border: 2px solid var(--medium-gray);
+  border-radius: var(--radius-lg);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: var(--stadium-gray);
-  color: var(--white);
+  background: var(--lighter-gray);
   border-color: var(--stadium-gray);
   transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-danger {
-  background: linear-gradient(135deg, var(--red-card) 0%, #c82333 100%);
+  background: var(--gradient-danger);
   color: var(--white);
-  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-lg);
 }
 
 .btn-danger:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+  box-shadow: var(--shadow-lg);
 }
 
 .btn-danger:disabled {
@@ -200,16 +205,17 @@
 }
 
 .error-banner {
-  background: rgba(220, 53, 69, 0.1);
-  border: 2px solid var(--red-card);
-  border-radius: 10px;
+  background: #FEE2E2;
+  border: 1px solid var(--red-card);
+  border-radius: var(--radius-lg);
   padding: 16px 20px;
   margin-bottom: 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: var(--red-card);
+  color: var(--red-card-dark);
   font-weight: 500;
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-close-error {

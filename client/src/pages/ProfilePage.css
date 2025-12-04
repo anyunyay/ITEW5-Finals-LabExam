@@ -13,31 +13,33 @@
 }
 
 .profile-header h2 {
-  color: var(--primary-blue);
-  font-size: 2.5rem;
+  color: var(--darker-gray);
+  font-size: 2.25rem;
   margin-bottom: 8px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
 }
 
 /* Player Card - Sports Trading Card Style */
 .player-card {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-  border-radius: 20px;
+  background: var(--white);
+  border-radius: var(--radius-2xl);
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-xl);
   margin-bottom: 30px;
-  border: 3px solid var(--primary-blue);
+  border: 1px solid var(--medium-gray);
   position: relative;
-  transition: all 0.3s ease;
+  transition: all var(--transition-base);
 }
 
 .player-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-2xl);
 }
 
 .player-card-header {
-  background: linear-gradient(135deg, var(--primary-blue) 0%, #0052a3 100%);
-  padding: 20px;
+  background: var(--gradient-primary);
+  padding: 24px;
   position: relative;
   overflow: hidden;
 }
@@ -203,10 +205,11 @@
 }
 
 .settings-card {
-  background: white;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: var(--white);
+  border-radius: var(--radius-2xl);
+  padding: 28px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--medium-gray);
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -264,15 +267,15 @@
 }
 
 .status-installed {
-  background: linear-gradient(135deg, var(--victory-green) 0%, #008833 100%);
+  background: var(--gradient-success);
   color: white;
-  box-shadow: 0 2px 8px rgba(0, 170, 68, 0.3);
+  box-shadow: var(--shadow-sm);
 }
 
 .status-not-installed {
-  background: rgba(108, 117, 125, 0.2);
+  background: var(--lighter-gray);
   color: var(--stadium-gray);
-  border: 2px solid var(--stadium-gray);
+  border: 2px solid var(--medium-gray);
 }
 
 /* Actions Section */
@@ -283,23 +286,22 @@
 }
 
 .btn-logout {
-  background: linear-gradient(135deg, var(--red-card) 0%, #b02a37 100%);
+  background: var(--gradient-danger);
   color: white;
   border: none;
-  padding: 16px 40px;
-  border-radius: 12px;
-  font-size: 1.1rem;
+  padding: 14px 36px;
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-md);
+  letter-spacing: -0.01em;
 }
 
 .btn-logout:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 .btn-logout:active {

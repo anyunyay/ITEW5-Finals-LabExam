@@ -1,10 +1,12 @@
 .navigation {
-  background: linear-gradient(135deg, var(--primary-blue) 0%, #0052A3 100%);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background: var(--white);
+  box-shadow: var(--shadow-md);
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 3px solid var(--championship-gold);
+  border-bottom: 1px solid var(--medium-gray);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .nav-container {
@@ -23,26 +25,22 @@
 }
 
 .nav-brand h1 {
-  color: var(--white);
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
   display: flex;
   align-items: center;
   gap: 10px;
-  transition: transform 0.2s ease;
+  transition: transform var(--transition-base);
   cursor: pointer;
 }
 
 .nav-brand a:hover h1 {
-  transform: scale(1.02);
-}
-
-.nav-brand h1::before {
-  content: '🏆';
-  font-size: 1.5rem;
+  transform: translateY(-2px);
 }
 
 .nav-links {
@@ -55,25 +53,26 @@
 
 .nav-links li a {
   display: block;
-  padding: 10px 20px;
-  color: var(--white);
+  padding: 10px 18px;
+  color: var(--dark-gray);
   font-weight: 600;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
   font-size: 0.9rem;
-  letter-spacing: 0.5px;
+  letter-spacing: -0.01em;
+  position: relative;
 }
 
 .nav-links li a:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: var(--championship-gold);
+  background: var(--lighter-gray);
+  color: var(--primary-blue);
+  transform: translateY(-1px);
 }
 
 .nav-links li a.active {
-  background: var(--championship-gold);
-  color: var(--dark-gray);
-  box-shadow: 0 2px 8px rgba(255, 183, 0, 0.4);
+  background: var(--gradient-primary);
+  color: var(--white);
+  box-shadow: var(--shadow-md);
   font-weight: 700;
 }
 
@@ -84,18 +83,23 @@
 }
 
 .user-display-name {
-  color: var(--white);
+  color: var(--dark-gray);
   font-weight: 600;
   font-size: 0.9rem;
-  padding: 10px 16px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  text-transform: none;
-  letter-spacing: 0.5px;
+  padding: 10px 18px;
+  background: var(--lighter-gray);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--medium-gray);
+  letter-spacing: -0.01em;
   display: flex;
   align-items: center;
   gap: 8px;
+  transition: all var(--transition-base);
+}
+
+.user-display-name:hover {
+  border-color: var(--primary-blue);
+  background: var(--light-gray);
 }
 
 @media (max-width: 768px) {
