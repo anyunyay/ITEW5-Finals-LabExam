@@ -28,17 +28,20 @@ function DashboardPage() {
     await deleteTask(id);
   };
 
-  const filteredTasks = tasks.filter((task) => {
+  // Ensure tasks is always an array
+  const taskList = Array.isArray(tasks) ? tasks : [];
+
+  const filteredTasks = taskList.filter((task) => {
     if (filterStatus === 'all') return true;
     return task.status === filterStatus;
   });
 
   const getTaskStats = () => {
     return {
-      total: tasks.length,
-      todo: tasks.filter((t) => t.status === 'todo').length,
-      inProgress: tasks.filter((t) => t.status === 'in-progress').length,
-      completed: tasks.filter((t) => t.status === 'completed').length,
+      total: taskList.length,
+      todo: taskList.filter((t) => t.status === 'todo').length,
+      inProgress: taskList.filter((t) => t.status === 'in-progress').length,
+      completed: taskList.filter((t) => t.status === 'completed').length,
     };
   };
 
@@ -134,7 +137,7 @@ function DashboardPage() {
         </div>
 
         <div className="tasks-section">
-          {loading && tasks.length === 0 ? (
+          {loading && taskList.length === 0 ? (
             <div className="loading-state">
               <div className="spinner"></div>
               <p>Loading your tasks...</p>
