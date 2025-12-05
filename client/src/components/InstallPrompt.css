@@ -1,4 +1,4 @@
-/* Install Prompt Component - Sports Theme */
+/* Install Prompt Component - Purple Theme */
 
 .install-prompt {
   position: fixed;
@@ -12,11 +12,11 @@
 }
 
 .install-prompt-content {
-  background: linear-gradient(135deg, #0066CC 0%, #0052A3 100%);
-  border: 2px solid #FFB700;
-  border-radius: 12px;
-  padding: 16px 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #D6BCFA 0%, #9F7AEA 100%);
+  border: 2px solid #B794F6;
+  border-radius: 16px;
+  padding: 20px 24px;
+  box-shadow: 0 8px 32px rgba(159, 122, 234, 0.3);
   display: flex;
   align-items: center;
   gap: 16px;
@@ -38,10 +38,8 @@
   margin: 0 0 4px 0;
   font-size: 1.1rem;
   font-weight: 700;
-  color: #FFB700;
-  font-family: 'Oswald', sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  color: white;
+  letter-spacing: 0.3px;
 }
 
 .install-prompt-text p {
@@ -59,25 +57,22 @@
 }
 
 .install-button {
-  background: linear-gradient(135deg, #FFB700 0%, #FFA000 100%);
-  color: #0066CC;
+  background: white;
+  color: #9F7AEA;
   border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 10px;
+  font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(255, 183, 0, 0.3);
-  font-family: 'Oswald', sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .install-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 183, 0, 0.5);
-  background: linear-gradient(135deg, #FFC107 0%, #FFB700 100%);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  background: #FAF5FF;
 }
 
 .install-button:active {
@@ -186,6 +181,6 @@
 /* Focus states for keyboard navigation */
 .install-button:focus,
 .dismiss-button:focus {
-  outline: 2px solid #FFB700;
+  outline: 2px solid white;
   outline-offset: 2px;
 }
