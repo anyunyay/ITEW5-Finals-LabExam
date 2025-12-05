@@ -1,5 +1,5 @@
 .task-detail-page {
-  padding: 20px;
+  padding: 24px;
   min-height: calc(100vh - 80px);
 }
 
@@ -12,7 +12,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 30px;
+  margin-bottom: 32px;
   gap: 20px;
 }
 
@@ -20,21 +20,21 @@
   color: var(--darker-gray);
   font-size: 2.25rem;
   margin-bottom: 8px;
-  font-weight: 800;
-  letter-spacing: -0.025em;
+  font-weight: 700;
+  letter-spacing: -0.03em;
 }
 
 .btn-back {
   background: var(--white);
-  color: var(--primary-blue);
-  border: 2px solid var(--medium-gray);
+  color: var(--primary-purple);
+  border: 1.5px solid var(--medium-gray);
   padding: 12px 24px;
-  border-radius: var(--radius-lg);
-  font-size: 1rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  transition: all var(--transition-base);
+  transition: all 0.2s ease;
   white-space: nowrap;
   display: inline-block;
 }
@@ -43,16 +43,16 @@
   background: var(--gradient-primary);
   color: var(--white);
   border-color: transparent;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(147, 51, 234, 0.25);
 }
 
 .task-detail-form {
   background: var(--white);
-  border-radius: var(--radius-2xl);
-  padding: 36px;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--medium-gray);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   position: relative;
   overflow: hidden;
 }
@@ -62,10 +62,11 @@
   position: absolute;
   top: -50px;
   right: -50px;
-  width: 180px;
-  height: 180px;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(147, 51, 234, 0.04) 0%, transparent 70%);
   pointer-events: none;
+  border-radius: 50%;
 }
 
 .form-group {
@@ -75,25 +76,26 @@
 .form-group label {
   display: block;
   margin-bottom: 8px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--dark-gray);
-  font-size: 1rem;
+  font-size: 0.9rem;
+  letter-spacing: -0.01em;
 }
 
 .required {
-  color: var(--red-card);
+  color: var(--error-red);
 }
 
 .form-group input,
 .form-group textarea,
 .form-group select {
   width: 100%;
-  padding: 14px 16px;
-  border: 2px solid var(--medium-gray);
-  border-radius: var(--radius-lg);
-  font-size: 1rem;
+  padding: 12px 16px;
+  border: 1.5px solid var(--medium-gray);
+  border-radius: 12px;
+  font-size: 0.95rem;
   font-family: inherit;
-  transition: all var(--transition-base);
+  transition: all 0.2s ease;
   background: var(--white);
 }
 
@@ -101,21 +103,22 @@
 .form-group textarea:focus,
 .form-group select:focus {
   outline: none;
-  border-color: var(--primary-blue);
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+  border-color: var(--primary-purple);
+  box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.08);
 }
 
 .form-group input:disabled,
 .form-group textarea:disabled,
 .form-group select:disabled {
-  background: var(--light-gray);
+  background: var(--lighter-gray);
   cursor: not-allowed;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .form-group textarea {
   resize: vertical;
   min-height: 120px;
+  line-height: 1.6;
 }
 
 .form-row {
@@ -130,7 +133,7 @@
   align-items: center;
   margin-top: 32px;
   padding-top: 24px;
-  border-top: 2px solid var(--light-gray);
+  border-top: 1px solid var(--lighter-gray);
   gap: 16px;
 }
 
@@ -142,8 +145,8 @@
 .btn {
   padding: 12px 24px;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -152,18 +155,22 @@
   gap: 8px;
   text-decoration: none;
   justify-content: center;
+  letter-spacing: -0.01em;
 }
 
 .btn-primary {
   background: var(--gradient-primary);
   color: var(--white);
-  box-shadow: var(--shadow-md);
-  border-radius: var(--radius-lg);
+  box-shadow: 0 1px 2px rgba(147, 51, 234, 0.15);
 }
 
 .btn-primary:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(147, 51, 234, 0.25);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .btn-primary:disabled {
@@ -175,27 +182,33 @@
 .btn-secondary {
   background: var(--white);
   color: var(--dark-gray);
-  border: 2px solid var(--medium-gray);
-  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--medium-gray);
 }
 
 .btn-secondary:hover:not(:disabled) {
   background: var(--lighter-gray);
-  border-color: var(--stadium-gray);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
+  border-color: var(--neutral-gray);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.btn-secondary:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .btn-danger {
   background: var(--gradient-danger);
   color: var(--white);
-  box-shadow: var(--shadow-md);
-  border-radius: var(--radius-lg);
+  box-shadow: 0 1px 2px rgba(239, 68, 68, 0.15);
 }
 
 .btn-danger:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+
+.btn-danger:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .btn-danger:disabled {
@@ -205,24 +218,24 @@
 }
 
 .error-banner {
-  background: #FEE2E2;
-  border: 1px solid var(--red-card);
-  border-radius: var(--radius-lg);
-  padding: 16px 20px;
+  background: #FEF2F2;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 12px;
+  padding: 14px 18px;
   margin-bottom: 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: var(--red-card-dark);
+  color: var(--error-red-dark);
   font-weight: 500;
-  box-shadow: var(--shadow-sm);
+  font-size: 0.9rem;
 }
 
 .btn-close-error {
   background: transparent;
   border: none;
-  color: var(--red-card);
-  font-size: 1.5rem;
+  color: var(--error-red);
+  font-size: 1.4rem;
   cursor: pointer;
   padding: 0;
   width: 28px;
@@ -235,7 +248,7 @@
 }
 
 .btn-close-error:hover {
-  background: rgba(220, 53, 69, 0.2);
+  background: rgba(239, 68, 68, 0.1);
 }
 
 .loading-state,
@@ -249,10 +262,10 @@
 }
 
 .spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid var(--light-gray);
-  border-top-color: var(--primary-blue);
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--lighter-gray);
+  border-top-color: var(--primary-purple);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
   margin-bottom: 20px;
@@ -265,32 +278,36 @@
 }
 
 .loading-state p {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
-  color: var(--stadium-gray);
+  color: var(--neutral-gray);
 }
 
 .error-state {
   background: var(--white);
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 60px 40px;
 }
 
 .error-icon {
-  font-size: 5rem;
+  font-size: 4.5rem;
   margin-bottom: 20px;
+  opacity: 0.6;
 }
 
 .error-state h3 {
   color: var(--dark-gray);
-  font-size: 1.8rem;
+  font-size: 1.75rem;
   margin-bottom: 12px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .error-state p {
-  color: var(--stadium-gray);
-  font-size: 1.1rem;
+  color: var(--neutral-gray);
+  font-size: 1rem;
   margin-bottom: 12px;
+  line-height: 1.6;
 }
 
 /* Delete Confirmation Modal */
@@ -300,13 +317,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   padding: 20px;
   animation: fadeIn 0.2s ease-in;
+  backdrop-filter: blur(4px);
 }
 
 @keyframes fadeIn {
@@ -320,10 +338,10 @@
 
 .modal-content {
   background: var(--white);
-  border-radius: 16px;
+  border-radius: 20px;
   width: 100%;
-  max-width: 500px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  max-width: 480px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   animation: slideUp 0.3s ease-out;
 }
 
@@ -340,15 +358,17 @@
 
 .delete-confirm-modal .modal-header {
   padding: 24px 28px;
-  border-bottom: 2px solid var(--light-gray);
-  background: linear-gradient(135deg, var(--red-card) 0%, #c82333 100%);
-  border-radius: 16px 16px 0 0;
+  border-bottom: 1px solid var(--lighter-gray);
+  background: linear-gradient(135deg, var(--error-red) 0%, #dc2626 100%);
+  border-radius: 20px 20px 0 0;
 }
 
 .delete-confirm-modal .modal-header h3 {
   color: var(--white);
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .modal-body {
@@ -357,23 +377,25 @@
 
 .modal-body p {
   color: var(--dark-gray);
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin-bottom: 12px;
+  line-height: 1.6;
 }
 
 .task-title-preview {
-  background: var(--light-gray);
+  background: var(--lighter-gray);
   padding: 12px 16px;
-  border-radius: 8px;
+  border-radius: 10px;
   font-weight: 600;
-  color: var(--primary-blue);
+  color: var(--primary-purple);
   margin: 16px 0;
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .warning-text {
-  color: var(--red-card);
+  color: var(--error-red);
   font-weight: 600;
-  font-size: 0.95rem !important;
+  font-size: 0.9rem !important;
 }
 
 .modal-actions {
@@ -404,7 +426,7 @@
   }
 
   .task-detail-form {
-    padding: 24px;
+    padding: 28px 24px;
   }
 
   .form-row {

@@ -6,21 +6,31 @@
 
 .logo-icon {
   flex-shrink: 0;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(147, 51, 234, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.logo:hover .logo-icon {
+  transform: scale(1.05);
 }
 
 .logo-text {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #1a1a1a;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   white-space: nowrap;
+  letter-spacing: -0.02em;
 }
 
 /* Size variants */
 .logo.small .logo-icon {
   width: 32px;
   height: 32px;
+  border-radius: 6px;
 }
 
 .logo.small .logo-text {
@@ -30,6 +40,7 @@
 .logo.medium .logo-icon {
   width: 48px;
   height: 48px;
+  border-radius: 8px;
 }
 
 .logo.medium .logo-text {
@@ -39,6 +50,7 @@
 .logo.large .logo-icon {
   width: 64px;
   height: 64px;
+  border-radius: 12px;
 }
 
 .logo.large .logo-text {
@@ -50,6 +62,7 @@
   .logo.large .logo-icon {
     width: 48px;
     height: 48px;
+    border-radius: 8px;
   }
 
   .logo.large .logo-text {
