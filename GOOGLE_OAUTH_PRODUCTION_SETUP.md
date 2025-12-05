@@ -142,8 +142,8 @@ does not match the ones authorized for the OAuth client.
 ### Render Environment Variables:
 
 ```
-GOOGLE_CLIENT_ID=your_google_client_id.apps.googleusercontent.com
-GOOGLE_CLIENT_SECRET=your_google_client_secret
+GOOGLE_CLIENT_ID=697126848110-hut8gcdo9u6m89d51cegv13splniabie.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=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
 GOOGLE_CALLBACK_URL=https://sports-pwa-backend.onrender.com/api/auth/google/callback
 CLIENT_URL=https://itew-5-finals-lab-exam.vercel.app
 ```

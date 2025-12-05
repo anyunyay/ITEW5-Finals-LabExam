@@ -39,10 +39,10 @@ Backend:  https://sports-pwa-backend.onrender.com
 
 **Add Environment Variables** (copy from `RENDER_ENVIRONMENT_VARIABLES.md`):
 ```
-MONGODB_URI=your_mongodb_connection_string
+MONGODB_URI=mongodb+srv://admin_db_user:qsZJZMWDDtPyaIpf@4itb-itew5-finals-labex.ci35w7p.mongodb.net/?appName=4ITB-ITEW5-Finals-LabExam
 JWT_SECRET=[GENERATE NEW SECRET]
-GOOGLE_CLIENT_ID=your_google_client_id.apps.googleusercontent.com
-GOOGLE_CLIENT_SECRET=your_google_client_secret
+GOOGLE_CLIENT_ID=697126848110-hut8gcdo9u6m89d51cegv13splniabie.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=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
 GOOGLE_CALLBACK_URL=https://sports-pwa-backend.onrender.com/api/auth/google/callback
 CLIENT_URL=https://itew-5-finals-lab-exam.vercel.app
 NODE_ENV=production

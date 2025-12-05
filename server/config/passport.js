@@ -81,15 +81,12 @@ const configurePassport = () => {
           }
 
           // Create new user with Google OAuth
-          // Note: username is intentionally omitted (will be null)
-          // The sparse index allows multiple users with null username
           user = new User({
             googleId: id,
             email,
             displayName: displayName || email.split('@')[0],
             avatar,
             authProvider: 'google',
-            username: null // Explicitly set to null for clarity
           });
 
           await user.save();
