@@ -96,8 +96,8 @@ function LoginPage() {
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
           <Logo size="large" showText={false} />
         </div>
-        <h2>🏟️ Stadium Entrance</h2>
-        <p className="page-description">Login to access your task management dashboard</p>
+        <h2>Welcome Back</h2>
+        <p className="page-description">Sign in to access your tasks and stay organized</p>
         
         {errors.general && (
           <div className="error-banner">
