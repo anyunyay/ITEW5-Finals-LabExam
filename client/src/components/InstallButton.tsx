@@ -19,7 +19,7 @@ const InstallButton = ({ variant = 'primary', size = 'medium', showIcon = true }
 
   useEffect(() => {
     console.log('🔍 InstallButton: Checking installation status...');
-    
+
     // Check if already installed
     const installed = localStorage.getItem('pwa-installed') === 'true';
     console.log('📱 Stored installation status:', installed);
@@ -33,13 +33,13 @@ const InstallButton = ({ variant = 'primary', size = 'medium', showIcon = true }
     // Check if running as standalone (already installed)
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
     const isIOSStandalone = (window.navigator as any).standalone === true;
-    
+
     console.log('🖥️ Display mode check:', {
       isStandalone,
       isIOSStandalone,
       displayMode: window.matchMedia('(display-mode: standalone)').matches ? 'standalone' : 'browser'
     });
-    
+
     if (isStandalone || isIOSStandalone) {
       console.log('✅ App running in standalone mode (already installed)');
       localStorage.setItem('pwa-installed', 'true');
@@ -116,24 +116,29 @@ const InstallButton = ({ variant = 'primary', size = 'medium', showIcon = true }
     }
   };
 
-  // Don't show button if already installed
-  if (isInstalled) {
+  // Check if in development mode
+  const isDevelopment = import.meta.env.DEV;
+
+  // Don't show button if already installed (except in development mode)
+  if (isInstalled && !isDevelopment) {
+    console.log('InstallButton: Hidden - app is installed');
     return null;
   }
 
-  // Show button if installable OR in development mode for testing
-  const isDevelopment = import.meta.env.DEV;
-  const showButton = isInstallable || (isDevelopment && !isInstalled);
+  // ALWAYS show button in development mode for testing
+  const showButton = isDevelopment || isInstallable;
 
   console.log('InstallButton render check:', {
     isInstallable,
     isDevelopment,
     isInstalled,
     showButton,
-    deferredPrompt: !!deferredPrompt
+    deferredPrompt: !!deferredPrompt,
+    mode: import.meta.env.MODE
   });
 
   if (!showButton) {
+    console.log('InstallButton: Not showing - conditions not met');
     return null;
   }
 
