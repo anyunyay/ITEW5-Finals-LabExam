@@ -9,10 +9,11 @@ const userSchema = new mongoose.Schema(
         return this.authProvider === 'local';
       },
       unique: true,
-      sparse: true,
+      sparse: true, // Allows multiple null values without duplicate key error
       trim: true,
       minlength: [3, 'Username must be at least 3 characters long'],
-      maxlength: [30, 'Username cannot exceed 30 characters']
+      maxlength: [30, 'Username cannot exceed 30 characters'],
+      default: null // Explicitly set default to null for Google OAuth users
     },
     email: {
       type: String,
