@@ -125,6 +125,14 @@ const InstallButton = ({ variant = 'primary', size = 'medium', showIcon = true }
   const isDevelopment = import.meta.env.DEV;
   const showButton = isInstallable || (isDevelopment && !isInstalled);
 
+  console.log('InstallButton render check:', {
+    isInstallable,
+    isDevelopment,
+    isInstalled,
+    showButton,
+    deferredPrompt: !!deferredPrompt
+  });
+
   if (!showButton) {
     return null;
   }
