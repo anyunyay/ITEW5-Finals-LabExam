@@ -30,12 +30,12 @@ xK9mP2nQ5rT8wY1zA4bC6dE7fG0hJ3kL5mN8pQ1rS4tU7vW0xY3zA6bC9dE2fG5h
 
 ### 3. GOOGLE_CLIENT_ID
 ```
-697126848110-hut8gcdo9u6m89d51cegv13splniabie.apps.googleusercontent.com
+your_google_client_id.apps.googleusercontent.com
 ```
 
 ### 4. GOOGLE_CLIENT_SECRET
 ```
-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
+your_google_client_secret
 ```
 
 ### 5. GOOGLE_CALLBACK_URL
@@ -111,10 +111,10 @@ If you see errors:
 If you prefer to copy all at once, here's the format for Render's bulk add:
 
 ```
-MONGODB_URI=mongodb+srv://admin_db_user:qsZJZMWDDtPyaIpf@4itb-itew5-finals-labex.ci35w7p.mongodb.net/?appName=4ITB-ITEW5-Finals-LabExam
+MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=YOUR_GENERATED_SECRET_HERE
-GOOGLE_CLIENT_ID=697126848110-hut8gcdo9u6m89d51cegv13splniabie.apps.googleusercontent.com
-GOOGLE_CLIENT_SECRET=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
+GOOGLE_CLIENT_ID=your_google_client_id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your_google_client_secret
 GOOGLE_CALLBACK_URL=https://sports-pwa-backend.onrender.com/api/auth/google/callback
 CLIENT_URL=https://itew-5-finals-lab-exam.vercel.app
 NODE_ENV=production
