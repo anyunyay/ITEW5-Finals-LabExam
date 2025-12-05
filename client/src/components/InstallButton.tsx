@@ -154,7 +154,12 @@ const InstallButton = ({ variant = 'primary', size = 'medium', showIcon = true }
       aria-label="Install app"
       title={!deferredPrompt && isDevelopment ? 'Install prompt not available (dev mode)' : 'Install app'}
     >
-      {showIcon && <span className="install-btn-icon">📲</span>}
+      {showIcon && (
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="install-btn-icon">
+          <path d="M9 2V12M9 12L6 9M9 12L12 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M3 12V14C3 15.1046 3.89543 16 5 16H13C14.1046 16 15 15.1046 15 14V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      )}
       <span className="install-btn-text">
         {!deferredPrompt && isDevelopment ? 'Install App (Dev)' : 'Install App'}
       </span>

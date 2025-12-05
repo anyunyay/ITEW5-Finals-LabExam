@@ -109,8 +109,8 @@ function RegisterPage() {
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
           <Logo size="large" showText={false} />
         </div>
-        <h2>🏆 Team Signup</h2>
-        <p className="page-description">Create your account to start managing tasks</p>
+        <h2>Create Account</h2>
+        <p className="page-description">Join us and start managing your tasks efficiently</p>
         
         {errors.general && (
           <div className="error-banner">
@@ -190,8 +190,13 @@ function RegisterPage() {
           onClick={handleGoogleSignup}
           disabled={loading}
         >
-          <span className="google-icon">🔐</span>
-          Sign up with Google
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17 9.2C17 8.6 16.95 8.05 16.85 7.5H9V10.7H13.4C13.2 11.7 12.65 12.55 11.85 13.1V15.1H14.55C16.05 13.7 17 11.65 17 9.2Z" fill="#4285F4"/>
+            <path d="M9 17C11.15 17 12.95 16.3 14.55 15.1L11.85 13.1C11.15 13.6 10.2 13.9 9 13.9C6.95 13.9 5.2 12.5 4.55 10.6H1.75V12.65C3.35 15.85 5.95 17 9 17Z" fill="#34A853"/>
+            <path d="M4.55 10.6C4.35 10.1 4.25 9.55 4.25 9C4.25 8.45 4.35 7.9 4.55 7.4V5.35H1.75C1.2 6.45 0.9 7.7 0.9 9C0.9 10.3 1.2 11.55 1.75 12.65L4.55 10.6Z" fill="#FBBC05"/>
+            <path d="M9 4.1C10.3 4.1 11.45 4.55 12.35 5.4L14.75 3C12.95 1.35 11.15 0.5 9 0.5C5.95 0.5 3.35 1.65 1.75 4.85L4.55 6.9C5.2 5 6.95 3.6 9 3.6V4.1Z" fill="#EA4335"/>
+          </svg>
+          <span>Sign up with Google</span>
         </button>
 
         <div className="page-footer">

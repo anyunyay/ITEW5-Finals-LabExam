@@ -4,6 +4,39 @@ import { useTask } from '../context/TaskContext';
 import { UpdateTaskData } from '../services/taskService';
 import './TaskDetailPage.css';
 
+// SVG Icon Components
+const BackIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 4L6 10L12 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const SaveIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 10L8 13L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const DeleteIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 5H16M7 5V4C7 3.44772 7.44772 3 8 3H12C12.5523 3 13 3.44772 13 4V5M8 9V14M12 9V14M5 5L6 16C6 16.5523 6.44772 17 7 17H13C13.5523 17 14 16.5523 14 16L15 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+  </svg>
+);
+
+const WarningIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 3L3 12L12 21L21 12L12 3Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M12 8V13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <circle cx="12" cy="16" r="0.5" fill="currentColor" />
+  </svg>
+);
+
+const CloseIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 5L15 15M15 5L5 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+  </svg>
+);
+
 interface TaskFormData {
   title: string;
   description: string;
@@ -160,7 +193,9 @@ function TaskDetailPage() {
       <div className="page task-detail-page">
         <div className="page-container">
           <div className="error-state">
-            <div className="error-icon">⚠️</div>
+            <div className="error-icon">
+              <WarningIcon />
+            </div>
             <h3>Task Not Found</h3>
             <p>{error}</p>
             <p>Redirecting to dashboard...</p>
@@ -178,17 +213,18 @@ function TaskDetailPage() {
       <div className="task-detail-container">
         <div className="task-detail-header">
           <div>
-            <h2>🎯 Play Card</h2>
-            <p className="page-description">View and edit task details</p>
+            <h2>Task Details</h2>
+            <p className="page-description">View and edit task information</p>
           </div>
           <Link to="/dashboard" className="btn-back">
-            ← Back to Dashboard
+            <BackIcon />
+            <span>Back to Dashboard</span>
           </Link>
         </div>
 
         {(error || validationError) && (
           <div className="error-banner">
-            <span>⚠️ {validationError || error}</span>
+            <span>{validationError || error}</span>
             <button
               onClick={() => {
                 setValidationError(null);
@@ -196,7 +232,7 @@ function TaskDetailPage() {
               }}
               className="btn-close-error"
             >
-              ✕
+              <CloseIcon />
             </button>
           </div>
         )}
@@ -241,9 +277,9 @@ function TaskDetailPage() {
                 onChange={handleChange}
                 disabled={isSubmitting}
               >
-                <option value="todo">📋 To Do</option>
-                <option value="in-progress">⚡ In Progress</option>
-                <option value="completed">🏆 Completed</option>
+                <option value="todo">To Do</option>
+                <option value="in-progress">In Progress</option>
+                <option value="completed">Completed</option>
               </select>
             </div>
 
@@ -256,9 +292,9 @@ function TaskDetailPage() {
                 onChange={handleChange}
                 disabled={isSubmitting}
               >
-                <option value="low">📌 Low</option>
-                <option value="medium">⚠️ Medium</option>
-                <option value="high">🔥 High</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
               </select>
             </div>
           </div>
@@ -282,7 +318,8 @@ function TaskDetailPage() {
               onClick={() => setShowDeleteConfirm(true)}
               disabled={isSubmitting || isDeleting}
             >
-              🗑️ Delete Task
+              <DeleteIcon />
+              <span>Delete Task</span>
             </button>
             <div className="form-actions-right">
               <Link
@@ -299,7 +336,8 @@ function TaskDetailPage() {
                 className="btn btn-primary"
                 disabled={isSubmitting || !hasChanges()}
               >
-                {isSubmitting ? 'Saving...' : '✓ Save Changes'}
+                <SaveIcon />
+                <span>{isSubmitting ? 'Saving...' : 'Save Changes'}</span>
               </button>
             </div>
           </div>
@@ -309,7 +347,10 @@ function TaskDetailPage() {
           <div className="modal-overlay" onClick={() => !isDeleting && setShowDeleteConfirm(false)}>
             <div className="modal-content delete-confirm-modal" onClick={(e) => e.stopPropagation()}>
               <div className="modal-header">
-                <h3>⚠️ Confirm Delete</h3>
+                <div className="modal-header-icon">
+                  <WarningIcon />
+                </div>
+                <h3>Confirm Delete</h3>
               </div>
               <div className="modal-body">
                 <p>Are you sure you want to delete this task?</p>
@@ -331,7 +372,8 @@ function TaskDetailPage() {
                   onClick={handleDelete}
                   disabled={isDeleting}
                 >
-                  {isDeleting ? 'Deleting...' : '🗑️ Delete Task'}
+                  <DeleteIcon />
+                  <span>{isDeleting ? 'Deleting...' : 'Delete Task'}</span>
                 </button>
               </div>
             </div>

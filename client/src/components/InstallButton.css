@@ -1,3 +1,4 @@
+/* Light Purple Install Button */
 .install-btn {
   display: inline-flex;
   align-items: center;
@@ -6,19 +7,19 @@
   font-family: inherit;
   font-weight: 600;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
 }
 
 .install-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-lg);
 }
 
 .install-btn:active {
-  transform: translateY(0);
+  transform: scale(0.98);
 }
 
 /* Sizes */
@@ -39,37 +40,43 @@
 
 /* Variants */
 .install-btn-primary {
-  background: linear-gradient(135deg, #0066CC 0%, #0052A3 100%);
+  background: var(--gradient-primary);
   color: white;
+  box-shadow: var(--shadow-purple);
 }
 
 .install-btn-primary:hover {
-  background: linear-gradient(135deg, #0052A3 0%, #004080 100%);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
 
 .install-btn-secondary {
-  background: linear-gradient(135deg, #28a745 0%, #218838 100%);
-  color: white;
+  background: var(--bg-primary);
+  color: var(--primary-dark);
+  border: 2px solid var(--primary-lighter);
 }
 
 .install-btn-secondary:hover {
-  background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+  background: var(--primary-lightest);
+  border-color: var(--primary-light);
 }
 
 .install-btn-outline {
   background: transparent;
-  color: #0066CC;
-  border: 2px solid #0066CC;
+  color: var(--primary-dark);
+  border: 2px solid var(--primary);
 }
 
 .install-btn-outline:hover {
-  background: #0066CC;
+  background: var(--primary);
   color: white;
 }
 
 .install-btn-icon {
-  font-size: 1.2em;
-  line-height: 1;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .install-btn-text {

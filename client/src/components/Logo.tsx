@@ -8,9 +8,9 @@ interface LogoProps {
 
 function Logo({ size = 'medium', showText = true, className = '' }: LogoProps) {
   const sizeMap = {
-    small: 32,
-    medium: 48,
-    large: 64
+    small: 36,
+    medium: 52,
+    large: 72
   };
 
   const iconSize = sizeMap[size];
@@ -20,28 +20,34 @@ function Logo({ size = 'medium', showText = true, className = '' }: LogoProps) {
       <svg 
         width={iconSize} 
         height={iconSize} 
-        viewBox="0 0 32 32" 
+        viewBox="0 0 48 48" 
         xmlns="http://www.w3.org/2000/svg"
         className="logo-icon"
       >
-        {/* Background */}
-        <rect width="32" height="32" fill="#0066CC" rx="4"/>
+        {/* Gradient Definitions */}
+        <defs>
+          <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#D6BCFA" />
+            <stop offset="100%" stopColor="#9F7AEA" />
+          </linearGradient>
+        </defs>
         
-        {/* Volleyball */}
-        <g transform="translate(16, 16)">
-          {/* Main circle */}
-          <circle cx="0" cy="0" r="9" fill="none" stroke="#FFFFFF" strokeWidth="1.5"/>
-          
-          {/* Volleyball pattern */}
-          {/* Left curved panel */}
-          <path d="M -6.36 -6.36 Q -3 -3 -6.36 6.36" fill="none" stroke="#FFFFFF" strokeWidth="1.5"/>
-          
-          {/* Right curved panel */}
-          <path d="M 6.36 -6.36 Q 3 -3 6.36 6.36" fill="none" stroke="#FFFFFF" strokeWidth="1.5"/>
-          
-          {/* Top curved panel */}
-          <path d="M -6.36 -6.36 Q 0 -4 6.36 -6.36" fill="none" stroke="#FFFFFF" strokeWidth="1.5"/>
-        </g>
+        {/* Background Circle */}
+        <circle cx="24" cy="24" r="22" fill="url(#purpleGradient)" />
+        
+        {/* Checkmark Icon */}
+        <path 
+          d="M 14 24 L 20 30 L 34 16" 
+          fill="none" 
+          stroke="#FFFFFF" 
+          strokeWidth="3.5" 
+          strokeLinecap="round" 
+          strokeLinejoin="round"
+        />
+        
+        {/* Decorative Dots */}
+        <circle cx="12" cy="12" r="2" fill="#FFFFFF" opacity="0.6" />
+        <circle cx="36" cy="36" r="2" fill="#FFFFFF" opacity="0.6" />
       </svg>
       {showText && <span className="logo-text">Sports Task Manager</span>}
     </div>

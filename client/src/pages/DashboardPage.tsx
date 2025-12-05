@@ -7,6 +7,63 @@ import './DashboardPage.css';
 
 type FilterStatus = 'all' | 'todo' | 'in-progress' | 'completed';
 
+// SVG Icon Components
+const PlusIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+  </svg>
+);
+
+const LiveIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="8" cy="8" r="3" fill="currentColor">
+      <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite" />
+    </circle>
+  </svg>
+);
+
+const CloseIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 4L14 14M14 4L4 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+  </svg>
+);
+
+const AllTasksIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="2" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.5" />
+    <rect x="10" y="2" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.5" />
+    <rect x="2" y="10" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.5" />
+    <rect x="10" y="10" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.5" />
+  </svg>
+);
+
+const TodoIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" />
+  </svg>
+);
+
+const InProgressIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth="1.5" />
+    <path d="M9 5V9L12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+  </svg>
+);
+
+const CompletedIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth="1.5" />
+    <path d="M6 9L8 11L12 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const EmptyIcon = () => (
+  <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="40" cy="40" r="35" stroke="currentColor" strokeWidth="2" opacity="0.2" />
+    <path d="M25 40H55M40 25V55" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity="0.3" />
+  </svg>
+);
+
 function DashboardPage() {
   const { tasks, loading, error, socketConnected, fetchTasks, createTask, updateTask, deleteTask, clearError } = useTask();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,12 +74,9 @@ function DashboardPage() {
   }, [fetchTasks]);
 
   const handleCreateTask = async (taskData: CreateTaskData) => {
-    console.log('🎯 Dashboard: Creating task', taskData);
     const result = await createTask(taskData);
-    if (result) {
-      console.log('✅ Dashboard: Task created successfully', result);
-    } else {
-      console.error('❌ Dashboard: Task creation failed');
+    if (!result) {
+      console.error('Task creation failed');
     }
   };
 
@@ -34,7 +88,6 @@ function DashboardPage() {
     await deleteTask(id);
   };
 
-  // Ensure tasks is always an array
   const taskList = Array.isArray(tasks) ? tasks : [];
 
   const filteredTasks = taskList.filter((task) => {
@@ -58,12 +111,13 @@ function DashboardPage() {
       <div className="dashboard-container">
         <div className="dashboard-header">
           <div className="dashboard-title">
-            <h2>📊 Game Plan Dashboard</h2>
+            <h2>My Tasks</h2>
             <p className="page-description">
-              Manage your tasks and track your progress
+              Organize and track your work
               {socketConnected && (
                 <span className="realtime-badge" title="Real-time updates active">
-                  🔴 Live
+                  <LiveIcon />
+                  <span>Live</span>
                 </span>
               )}
             </p>
@@ -73,41 +127,52 @@ function DashboardPage() {
             onClick={() => setIsModalOpen(true)}
             disabled={loading}
           >
-            ➕ Create Task
+            <PlusIcon />
+            <span>New Task</span>
           </button>
         </div>
 
         {error && (
           <div className="error-banner">
-            <span>⚠️ {error}</span>
-            <button onClick={clearError} className="btn-close-error">✕</button>
+            <span>{error}</span>
+            <button onClick={clearError} className="btn-close-error">
+              <CloseIcon />
+            </button>
           </div>
         )}
 
         <div className="dashboard-stats">
           <div className="stat-card stat-total">
-            <div className="stat-icon">📋</div>
+            <div className="stat-icon">
+              <AllTasksIcon />
+            </div>
             <div className="stat-content">
               <div className="stat-value">{stats.total}</div>
-              <div className="stat-label">Total Tasks</div>
+              <div className="stat-label">Total</div>
             </div>
           </div>
           <div className="stat-card stat-todo">
-            <div className="stat-icon">📝</div>
+            <div className="stat-icon">
+              <TodoIcon />
+            </div>
             <div className="stat-content">
               <div className="stat-value">{stats.todo}</div>
               <div className="stat-label">To Do</div>
             </div>
           </div>
           <div className="stat-card stat-progress">
-            <div className="stat-icon">⚡</div>
+            <div className="stat-icon">
+              <InProgressIcon />
+            </div>
             <div className="stat-content">
               <div className="stat-value">{stats.inProgress}</div>
               <div className="stat-label">In Progress</div>
             </div>
           </div>
           <div className="stat-card stat-completed">
-            <div className="stat-icon">🏆</div>
+            <div className="stat-icon">
+              <CompletedIcon />
+            </div>
             <div className="stat-content">
               <div className="stat-value">{stats.completed}</div>
               <div className="stat-label">Completed</div>
@@ -120,25 +185,29 @@ function DashboardPage() {
             className={`filter-btn ${filterStatus === 'all' ? 'active' : ''}`}
             onClick={() => setFilterStatus('all')}
           >
-            All Tasks
+            <AllTasksIcon />
+            <span>All</span>
           </button>
           <button
             className={`filter-btn ${filterStatus === 'todo' ? 'active' : ''}`}
             onClick={() => setFilterStatus('todo')}
           >
-            📋 To Do
+            <TodoIcon />
+            <span>To Do</span>
           </button>
           <button
             className={`filter-btn ${filterStatus === 'in-progress' ? 'active' : ''}`}
             onClick={() => setFilterStatus('in-progress')}
           >
-            ⚡ In Progress
+            <InProgressIcon />
+            <span>In Progress</span>
           </button>
           <button
             className={`filter-btn ${filterStatus === 'completed' ? 'active' : ''}`}
             onClick={() => setFilterStatus('completed')}
           >
-            🏆 Completed
+            <CompletedIcon />
+            <span>Completed</span>
           </button>
         </div>
 
@@ -151,24 +220,25 @@ function DashboardPage() {
           ) : filteredTasks.length === 0 ? (
             <div className="empty-state">
               <div className="empty-icon">
-                {filterStatus === 'all' ? '🎯' : '📭'}
+                <EmptyIcon />
               </div>
               <h3>
                 {filterStatus === 'all'
-                  ? 'No tasks yet!'
+                  ? 'No tasks yet'
                   : `No ${filterStatus.replace('-', ' ')} tasks`}
               </h3>
               <p>
                 {filterStatus === 'all'
-                  ? 'Create your first task to get started on your game plan.'
-                  : 'Try selecting a different filter to see other tasks.'}
+                  ? 'Create your first task to get started'
+                  : 'Try selecting a different filter'}
               </p>
               {filterStatus === 'all' && (
                 <button
                   className="btn-create-task-empty"
                   onClick={() => setIsModalOpen(true)}
                 >
-                  ➕ Create Your First Task
+                  <PlusIcon />
+                  <span>Create Task</span>
                 </button>
               )}
             </div>

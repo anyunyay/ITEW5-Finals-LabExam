@@ -92,21 +92,23 @@ function CreateTaskModal({ isOpen, onClose, onCreate }: CreateTaskModalProps) {
     <div className="modal-overlay" onClick={handleClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
-          <h2>🎯 Create New Task</h2>
+          <h2>Create New Task</h2>
           <button
             className="modal-close"
             onClick={handleClose}
             disabled={isSubmitting}
             aria-label="Close modal"
           >
-            ✕
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 5L15 15M15 5L5 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="create-task-form">
           {error && (
             <div className="error-message">
-              ⚠️ {error}
+              {error}
             </div>
           )}
 
@@ -150,9 +152,9 @@ function CreateTaskModal({ isOpen, onClose, onCreate }: CreateTaskModalProps) {
                 onChange={handleChange}
                 disabled={isSubmitting}
               >
-                <option value="todo">📋 To Do</option>
-                <option value="in-progress">⚡ In Progress</option>
-                <option value="completed">🏆 Completed</option>
+                <option value="todo">To Do</option>
+                <option value="in-progress">In Progress</option>
+                <option value="completed">Completed</option>
               </select>
             </div>
 
@@ -165,9 +167,9 @@ function CreateTaskModal({ isOpen, onClose, onCreate }: CreateTaskModalProps) {
                 onChange={handleChange}
                 disabled={isSubmitting}
               >
-                <option value="low">📌 Low</option>
-                <option value="medium">⚠️ Medium</option>
-                <option value="high">🔥 High</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
               </select>
             </div>
           </div>
@@ -198,7 +200,7 @@ function CreateTaskModal({ isOpen, onClose, onCreate }: CreateTaskModalProps) {
               className="btn btn-primary"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Creating...' : '✓ Create Task'}
+              {isSubmitting ? 'Creating...' : 'Create Task'}
             </button>
           </div>
         </form>

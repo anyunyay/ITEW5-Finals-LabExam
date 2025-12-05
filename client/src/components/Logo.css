@@ -1,29 +1,31 @@
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .logo-icon {
   flex-shrink: 0;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(147, 51, 234, 0.15);
-  transition: transform 0.2s ease;
+  filter: drop-shadow(0 3px 10px rgba(183, 148, 246, 0.3));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .logo:hover .logo-icon {
-  transform: scale(1.05);
+  transform: scale(1.08) rotate(2deg);
+  filter: drop-shadow(0 5px 15px rgba(183, 148, 246, 0.45));
 }
 
 .logo-text {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 700;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary-dark);
   white-space: nowrap;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  transition: color 0.3s ease;
+}
+
+.logo:hover .logo-text {
+  color: var(--primary);
 }
 
 /* Size variants */
