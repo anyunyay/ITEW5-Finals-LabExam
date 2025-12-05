@@ -59,10 +59,24 @@ const configurePassport = () => {
             user.authProvider = 'google';
             user.displayName = displayName || user.displayName;
             user.avatar = avatar || user.avatar;
-            // Clear password since they're now using OAuth
-            user.password = undefined;
-
-            await user.save();
+            
+            // Use updateOne to avoid validation issues with username field
+            // This allows us to keep the username but switch to Google auth
+            await User.updateOne(
+              { _id: user._id },
+              {
+                $set: {
+                  googleId: id,
+                  authProvider: 'google',
+                  displayName: displayName || user.displayName,
+                  avatar: avatar || user.avatar
+                },
+                $unset: { password: '' }
+              }
+            );
+            
+            // Fetch the updated user
+            user = await User.findById(user._id);
             return done(null, user);
           }
 
