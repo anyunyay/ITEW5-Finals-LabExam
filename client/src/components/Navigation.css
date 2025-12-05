@@ -1,33 +1,32 @@
 .navigation {
-  background: var(--white);
-  box-shadow: var(--shadow-md);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 1px solid var(--medium-gray);
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(12px);
 }
 
 .nav-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 70px;
+  min-height: 68px;
 }
 
 .nav-brand a {
   text-decoration: none;
   color: inherit;
   display: block;
-  transition: transform var(--transition-base);
+  transition: transform 0.2s ease;
 }
 
 .nav-brand a:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .nav-brand h1 {
@@ -35,9 +34,9 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: -0.025em;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -47,7 +46,7 @@
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 10px;
+  gap: 8px;
   margin: 0;
   padding: 0;
 }
@@ -57,8 +56,8 @@
   padding: 10px 18px;
   color: var(--dark-gray);
   font-weight: 600;
-  border-radius: var(--radius-lg);
-  transition: all var(--transition-base);
+  border-radius: 12px;
+  transition: all 0.2s ease;
   font-size: 0.9rem;
   letter-spacing: -0.01em;
   position: relative;
@@ -66,15 +65,15 @@
 
 .nav-links li a:hover {
   background: var(--lighter-gray);
-  color: var(--primary-blue);
+  color: var(--primary-purple);
   transform: translateY(-1px);
 }
 
 .nav-links li a.active {
   background: var(--gradient-primary);
   color: var(--white);
-  box-shadow: var(--shadow-md);
-  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(147, 51, 234, 0.25);
+  font-weight: 600;
 }
 
 .nav-user-info {
@@ -89,29 +88,29 @@
   font-size: 0.9rem;
   padding: 10px 18px;
   background: var(--lighter-gray);
-  border-radius: var(--radius-full);
-  border: 2px solid var(--medium-gray);
+  border-radius: 24px;
+  border: 1.5px solid rgba(0, 0, 0, 0.08);
   letter-spacing: -0.01em;
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: all var(--transition-base);
+  transition: all 0.2s ease;
 }
 
 .user-display-name:hover {
-  border-color: var(--primary-blue);
-  background: var(--light-gray);
+  border-color: var(--primary-purple);
+  background: rgba(147, 51, 234, 0.04);
 }
 
 @media (max-width: 768px) {
   .nav-container {
     flex-direction: column;
-    padding: 15px 20px;
+    padding: 16px 20px;
   }
 
   .nav-brand h1 {
-    font-size: 1.4rem;
-    margin-bottom: 10px;
+    font-size: 1.3rem;
+    margin-bottom: 12px;
   }
 
   .nav-links {
@@ -120,7 +119,7 @@
   }
 
   .nav-links li a {
-    padding: 8px 15px;
+    padding: 8px 14px;
     font-size: 0.85rem;
   }
 }

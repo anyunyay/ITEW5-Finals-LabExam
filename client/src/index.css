@@ -1,29 +1,32 @@
 :root {
-  /* Modern Sports Theme Color Palette */
-  --primary-blue: #2563EB;
-  --primary-blue-dark: #1E40AF;
-  --primary-blue-light: #3B82F6;
-  --victory-green: #10B981;
-  --victory-green-dark: #059669;
-  --championship-gold: #F59E0B;
-  --championship-gold-dark: #D97706;
-  --referee-yellow: #FCD34D;
-  --red-card: #EF4444;
-  --red-card-dark: #DC2626;
-  --stadium-gray: #6B7280;
+  /* Modern Minimalist Purple Palette */
+  --primary-purple: #9333EA;
+  --primary-purple-dark: #7E22CE;
+  --primary-purple-light: #A855F7;
+  --accent-purple: #C084FC;
+  --accent-purple-light: #E9D5FF;
+  --success-green: #10B981;
+  --success-green-dark: #059669;
+  --warning-amber: #F59E0B;
+  --warning-amber-dark: #D97706;
+  --error-red: #EF4444;
+  --error-red-dark: #DC2626;
+  --neutral-gray: #6B7280;
   --white: #FFFFFF;
-  --light-gray: #F9FAFB;
-  --lighter-gray: #F3F4F6;
+  --off-white: #FAFAFA;
+  --light-gray: #F5F5F7;
+  --lighter-gray: #F9FAFB;
   --medium-gray: #E5E7EB;
-  --dark-gray: #1F2937;
-  --darker-gray: #111827;
+  --dark-gray: #374151;
+  --darker-gray: #1F2937;
   
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #2563EB 0%, #1E40AF 100%);
+  --gradient-primary: linear-gradient(135deg, #9333EA 0%, #7E22CE 100%);
+  --gradient-accent: linear-gradient(135deg, #C084FC 0%, #A855F7 100%);
   --gradient-success: linear-gradient(135deg, #10B981 0%, #059669 100%);
   --gradient-warning: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
   --gradient-danger: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
-  --gradient-background: linear-gradient(135deg, #F9FAFB 0%, #E5E7EB 100%);
+  --gradient-background: linear-gradient(180deg, #FAFAFA 0%, #F5F5F7 100%);
   
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -53,13 +56,14 @@
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
   background: var(--gradient-background);
   color: var(--dark-gray);
   min-height: 100vh;
-  line-height: 1.6;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
 }
 
 #root {
@@ -75,13 +79,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-  color: var(--primary-blue);
+  color: var(--primary-purple);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 a:hover {
-  color: var(--victory-green);
+  color: var(--primary-purple-dark);
 }
 
 button {
@@ -93,7 +97,7 @@ button {
 }
 
 button:focus-visible {
-  outline: 2px solid var(--primary-blue);
+  outline: 2px solid var(--primary-purple);
   outline-offset: 2px;
 }
 
@@ -108,23 +112,23 @@ button:disabled {
 
 /* Utility Classes */
 .text-primary {
-  color: var(--primary-blue);
+  color: var(--primary-purple);
 }
 
 .text-success {
-  color: var(--victory-green);
+  color: var(--success-green);
 }
 
 .text-warning {
-  color: var(--championship-gold);
+  color: var(--warning-amber);
 }
 
 .text-danger {
-  color: var(--red-card);
+  color: var(--error-red);
 }
 
 .text-muted {
-  color: var(--stadium-gray);
+  color: var(--neutral-gray);
 }
 
 /* Modern Animations */
@@ -235,19 +239,19 @@ button:disabled {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-blue);
+  background: var(--primary-purple);
 }
 
 /* Focus Styles */
 *:focus-visible {
-  outline: 2px solid var(--primary-blue);
+  outline: 2px solid var(--primary-purple);
   outline-offset: 2px;
 }
 
 /* Selection Styles */
 ::selection {
-  background-color: var(--primary-blue-light);
-  color: var(--white);
+  background-color: var(--accent-purple-light);
+  color: var(--primary-purple-dark);
 }
 
 /* Smooth Scroll */
